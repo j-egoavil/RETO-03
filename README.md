@@ -150,3 +150,62 @@ class Square(Rectangle):
             super().__init__(2, Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2), side, side)
         else:
             raise ValueError("Error: Invalid method")
+```
+### PUNTO 2 (`Reto 03.py`)
+
+### Enunciado
+
+Escenario de restaurante: Se desea diseñar un programa para calcular la cuenta del pedido de un cliente.
+Defina la clase base `MenuItem`: Esta clase debe tener atributos como nombre, precio y un método para calcular el precio total.
+Cree subclases para diferentes tipos de elementos del menú: Herede de `MenuItem` y defina propiedades específicas para cada tipo (por ejemplo, `Bebida`, `Aperitivo`, `Plato principal`).
+Defina la clase `Orden`: Esta clase debe tener una lista de objetos `MenuItem` y métodos para añadir elementos, calcular el importe total de la cuenta y, potencialmente, aplicar descuentos específicos según la composición del pedido.
+
+### Diagrama de clases  
+
+
+```mermaid
+classDiagram
+    class MenuItem {
+        -String nombre
+        -float precio
+        +__init__(nombre: str, precio: float)
+        +get_total() float
+        +__str__() str
+    }
+
+    class Bebida {
+        -String tamaño
+        +__init__(nombre: str, precio: float, tamaño: str = "regular")
+        +__str__() str
+    }
+
+    class Entrada {
+        -bool compartido
+        +__init__(nombre: str, precio: float, compartido: bool = false)
+        +__str__() str
+    }
+
+    class PlatoPrincipal {
+        -String proteina
+        +__init__(nombre: str, precio: float, proteina: str)
+        +__str__() str
+    }
+
+    class Pedido {
+        -int numero_mesa
+        -List~MenuItem~ items
+        +__init__(numero_mesa: int)
+        +agregar_item(item: MenuItem) void
+        +get_subtotal() float
+        +aplicar_descuento(subtotal: float) tuple
+        +get_total() float
+        +mostrar_factura() void
+    }
+
+    MenuItem <|-- Bebida
+    MenuItem <|-- Entrada
+    MenuItem <|-- PlatoPrincipal
+    Pedido *-- MenuItem : contains
+```
+### Codigo completo
+```python
