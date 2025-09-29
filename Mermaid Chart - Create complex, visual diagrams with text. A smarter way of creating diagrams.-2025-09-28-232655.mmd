@@ -1,0 +1,42 @@
+classDiagram
+    class MenuItem {
+        -String nombre
+        -float precio
+        +__init__(nombre: str, precio: float)
+        +get_total() float
+        +__str__() str
+    }
+
+    class Bebida {
+        -String tamaño
+        +__init__(nombre: str, precio: float, tamaño: str = "regular")
+        +__str__() str
+    }
+
+    class Entrada {
+        -bool compartido
+        +__init__(nombre: str, precio: float, compartido: bool = false)
+        +__str__() str
+    }
+
+    class PlatoPrincipal {
+        -String proteina
+        +__init__(nombre: str, precio: float, proteina: str)
+        +__str__() str
+    }
+
+    class Pedido {
+        -int numero_mesa
+        -List~MenuItem~ items
+        +__init__(numero_mesa: int)
+        +agregar_item(item: MenuItem) void
+        +get_subtotal() float
+        +aplicar_descuento(subtotal: float) tuple
+        +get_total() float
+        +mostrar_factura() void
+    }
+
+    MenuItem <|-- Bebida
+    MenuItem <|-- Entrada
+    MenuItem <|-- PlatoPrincipal
+    Pedido *-- MenuItem : contains
